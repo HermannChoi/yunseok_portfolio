@@ -1,0 +1,17 @@
+.info_space {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 300px;
+}
+
+.profile_space {
+  display: flex;
+}
+
+.profileImg {
+  border-radius: 10px;
+  margin-right: 30px;
+}

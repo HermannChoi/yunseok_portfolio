@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import styles from "./FirstCover.module.scss";
+import { useStore } from "zustand";
+import welcomeStore from "@/stores/welcomeStore";
 
 const FirstCover = () => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
@@ -11,9 +13,17 @@ const FirstCover = () => {
   const [walls, setWalls] = useState(false);
   const [done, setDone] = useState(false);
 
+  const store = welcomeStore();
+  const { userName } = welcomeStore();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFadeOut(true);
+    const inputName = e.currentTarget.elements.namedItem(
+      "inputName"
+    ) as HTMLInputElement;
+
+    store.setUserName(inputName.value);
 
     setTimeout(() => {
       setIsFormSubmitted(true);
@@ -45,6 +55,7 @@ const FirstCover = () => {
           <input
             required
             type="text"
+            name="inputName"
             className={styles.input}
             placeholder="이름 입력"
           ></input>
@@ -88,6 +99,7 @@ const FirstCover = () => {
           className={`${walls ? styles.rWallAni : null} ${styles.right_wall}`}
         ></div>
       </div>
+      <div className={styles.welcome}>{userName}님 환영합니다.</div>
     </div>
   );
 };
